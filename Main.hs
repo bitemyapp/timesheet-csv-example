@@ -84,4 +84,6 @@ main = do
         (Left errors) -> putStrLn ("Error(s) occurred: " ++ concat errors)
         (Right records) -> do
           print records
+          -- this used to be V.foldr mappend mempty because I forgot
+          -- how stupid the Monoid for Map is.
           print $ V.foldr (M.unionWith mappend) mempty records
